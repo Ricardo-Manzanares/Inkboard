@@ -307,6 +307,13 @@ export async function scanNetwork(prev = {}, { inventoryFile, forgetDays = 7, ga
 
   const seen = new Map();
   for (const x of after.list) if (usable(x, hostSet) && x.online) seen.set(x.mac, x.ip);
+  // Una entrada confirmada justo antes del barrido no se vuelve a preguntar y puede caducar a Stale durante la
+  // espera. Esas se sondean otra vez: enviar a una entrada Stale obliga a confirmarla por ARP.
+  const stale = after.list.filter((x) => usable(x, hostSet) && !x.online && /stale/i.test(x.state || ''));
+  if (stale.length) {
+    await probe(stale.map((x) => x.ip));
+    for (const x of (await neighbors()).list) if (usable(x, hostSet) && x.online) seen.set(x.mac, x.ip);
+  }
   const selfMac = normMac(iface.mac);
   seen.set(selfMac, iface.address);
 

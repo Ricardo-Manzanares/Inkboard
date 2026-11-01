@@ -337,13 +337,14 @@ export function networkList(src, { detail, label, W }) {
     (a, b) => rank[statusOf(a, now)] - rank[statusOf(b, now)] || (a.ip || '').localeCompare(b.ip || '', 'es', { numeric: true }),
   );
   const shown = all.slice(0, MAX_ROWS);
-  const cols = { name: 410, ip: 170, link: 130, time: W - 410 - 170 - 130 - 52 };
+  const cols = { name: 270, mac: 222, ip: 158, link: 100, time: W - 270 - 222 - 158 - 100 - 52 };
 
   const head = row(
     { gap: 0, paddingLeft: 52 },
     div({ width: cols.name }, label('Equipo')),
+    div({ width: cols.mac }, label('MAC')),
     div({ width: cols.ip }, label('IP')),
-    div({ width: cols.link }, label('Conexión')),
+    div({ width: cols.link }, label('Red')),
     div({ width: cols.time }, label('Conectado')),
   );
   const rows = shown.map((x) => {
@@ -353,10 +354,11 @@ export function networkList(src, { detail, label, W }) {
     return row(
       { gap: 0, height: 34 },
       el('svg', { width: 52, height: 34, viewBox: '0 0 52 34' }, nodeShape(17, 17, 15, ICONS[x.type] || mdiHelp, status, { dashed: !x.known }).filter(Boolean)),
-      text(fit(name, cols.name - 10, 21), { width: cols.name, fontSize: 21, fontWeight: 700, color: dim ? C.dim : C.ink, whiteSpace: 'nowrap' }),
-      text(x.ip || '–', { width: cols.ip, fontSize: 21 }),
-      text(LINK[x.link] || '–', { width: cols.link, fontSize: 21 }),
-      text(x.online ? (x.onlineSince ? duration(now - new Date(x.onlineSince)) : 'en línea') : whenLine(x, now), { width: cols.time, fontSize: 21, fontWeight: x.online ? 700 : 400, color: dim ? C.dim : C.ink }),
+      text(fit(name, cols.name - 10, 20), { width: cols.name, fontSize: 20, fontWeight: 700, color: dim ? C.dim : C.ink, whiteSpace: 'nowrap' }),
+      text(x.mac && x.mac.includes(':') ? x.mac : '–', { width: cols.mac, fontSize: 18, letterSpacing: -0.2, fontWeight: x.known ? 400 : 700 }),
+      text(x.ip || '–', { width: cols.ip, fontSize: 20 }),
+      text(LINK[x.link] || '–', { width: cols.link, fontSize: 20 }),
+      text(x.online ? (x.onlineSince ? duration(now - new Date(x.onlineSince)) : 'en línea') : whenLine(x, now), { width: cols.time, fontSize: 20, fontWeight: x.online ? 700 : 400, color: dim ? C.dim : C.ink }),
     );
   });
   return detail(
@@ -366,7 +368,7 @@ export function networkList(src, { detail, label, W }) {
     col({ gap: 1, marginTop: -10 }, rows),
     all.length > shown.length && text(`y ${num(all.length - shown.length)} más`, { fontSize: 20, color: C.dim }),
     text(
-      `«Conectado» cuenta desde que el agente del PC lo ve sin interrupción; con el PC apagado no se mide.`,
+      `MAC en negrita: equipo sin identificar; añádela a agent/devices.json. «Conectado» cuenta desde que el agente del PC lo ve sin interrupción.`,
       { fontSize: 18, color: C.dim },
     ),
     errorLine(src),
