@@ -65,7 +65,7 @@ export const text = (str, style) => div(style, String(str));
 export const icon = (path, size = 32, color = C.ink) =>
   el('svg', { width: size, height: size, viewBox: '0 0 24 24' }, el('path', { d: path, fill: color }));
 
-// Insignia redonda con icono, como las de las tarjetas de Home Assistant.
+// Insignia redonda con icono, como las de las tarjetas
 export const badge = (path, size = 56) =>
   div(
     { width: size, height: size, borderRadius: size / 2, background: C.ink, alignItems: 'center', justifyContent: 'center' },

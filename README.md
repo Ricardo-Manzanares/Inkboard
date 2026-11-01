@@ -1,6 +1,6 @@
 # Kindle Dashboard
 
-Dashboard e-ink, al estilo de Home Assistant, para un Kindle con jailbreak: límites y tokens de Claude Code,
+Dashboard e-ink, para un Kindle con jailbreak: límites y tokens de Claude Code,
 Immich, Railway, Search Console, GitHub, gasto de Google Cloud y un mapa de los dispositivos de la red local.
 La misma imagen se ve en el navegador y como widget de escritorio en Windows (Rainmeter).
 
