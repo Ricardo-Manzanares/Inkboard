@@ -51,12 +51,15 @@ const backHint = () =>
 
 export const isView = (v) => Object.hasOwn(DETAILS, v);
 
+// El widget sin cabecera (la hora ya está en Windows) no tiene alto fijo: ocupa lo que ocupen las tarjetas.
+const autoHeight = (opts) => opts.widget && !opts.header;
+
 function layout(state, opts) {
   const detail = isView(opts.view) && DETAILS[opts.view];
   return col(
     {
       width: WIDTH,
-      height: HEIGHT,
+      ...(autoHeight(opts) ? {} : { height: HEIGHT }),
       background: C.page,
       padding: opts.widget ? '6px 22px 8px' : detail ? '16px 22px 34px' : '16px 22px 20px',
       gap: 12,
@@ -64,9 +67,9 @@ function layout(state, opts) {
       fontFamily: 'Inter',
       color: C.ink,
     },
-    // En el widget la cabecera va en su propia tarjeta, para leerse sobre cualquier fondo de escritorio.
+    // En el widget la cabecera, si se pide, va en su propia tarjeta para leerse sobre cualquier fondo de escritorio.
     opts.widget
-      ? col({ background: C.card, borderRadius: 26, padding: '8px 14px 10px' }, header(opts))
+      ? opts.header && col({ background: C.card, borderRadius: 26, padding: '8px 14px 10px' }, header(opts))
       : header(opts, !detail && PAGE_COUNT > 1 && dots(opts.page)),
     detail ? detail(state[opts.view]) : PAGES[opts.page](state),
     detail && backHint(),
@@ -79,7 +82,7 @@ export const pageIndex = (n) => ((Math.trunc(Number(n) || 0) % PAGE_COUNT) + PAG
 const svgOf = (state, opts) =>
   satori(
     withTheme(opts.theme, () => layout(state, { now: new Date(), refreshMinutes: 5, ...opts, page: pageIndex(opts.page) })),
-    { width: WIDTH, height: HEIGHT, fonts },
+    autoHeight(opts) ? { width: WIDTH, fonts } : { width: WIDTH, height: HEIGHT, fonts },
   );
 
 // Para la página web: vectorial, se ve nítido a cualquier tamaño.
@@ -91,7 +94,8 @@ export async function renderPng(state, opts = {}) {
   return sharp(Buffer.from(svg)).flatten({ background: '#ffffff' }).toColourspace('b-w').png({ compressionLevel: 9 }).toBuffer();
 }
 
-// Widget de escritorio (Rainmeter): tema oscuro o claro, fondo transparente y el ancho pedido, con la misma proporción.
+// Widget de escritorio (Rainmeter): tema oscuro o claro, fondo transparente y el ancho pedido. Sin header, solo las
+// tarjetas y con su alto natural; con header: true, la cabecera de hora y fecha y la proporción del Kindle.
 export const WIDGET_WIDTH = { min: 240, max: 2144 };
 export const widgetTheme = (t) => (Object.hasOwn(THEMES, t) ? t : 'dark');
 export async function renderWidget(state, { width = WIDTH, theme, ...opts } = {}) {

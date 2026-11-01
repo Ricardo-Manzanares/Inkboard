@@ -180,12 +180,12 @@ for (const view of Object.keys(DETAILS)) {
   console.log(`out/detail-${view}.png`);
 }
 
-// Widget de escritorio en los dos temas, sobre un degradado de colores para ver la transparencia.
-for (const theme of ['dark', 'light']) {
-  const widget = await renderWidget(state, { width: 560, theme });
+// Widget de escritorio, sobre un degradado de colores para ver la transparencia: métricas en los dos temas y la red.
+for (const [theme, page] of [['dark', 0], ['light', 0], ['dark', 1]]) {
+  const widget = await renderWidget(state, { width: 560, theme, page });
   const { width: ww, height: wh } = await sharp(widget).metadata();
   const wallpaper = `<svg xmlns="http://www.w3.org/2000/svg" width="${ww + 80}" height="${wh + 80}"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a5d8f"/><stop offset="1" stop-color="#d98c4a"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>`;
-  const file = theme === 'dark' ? 'out/widget.png' : `out/widget-${theme}.png`;
+  const file = page ? `out/widget-${page + 1}.png` : theme === 'dark' ? 'out/widget.png' : `out/widget-${theme}.png`;
   await sharp(Buffer.from(wallpaper)).composite([{ input: widget, left: 40, top: 40 }]).png().toFile(file);
   console.log(`${file} (${ww}×${wh})`);
 }

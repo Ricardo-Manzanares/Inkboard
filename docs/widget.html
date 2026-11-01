@@ -68,9 +68,11 @@ blockquote { margin: 1em 0; padding: .2em 1em; border-left: 4px solid var(--acce
   </nav>
   <main><article>
 <h1 id="widget-de-escritorio">Widget de escritorio</h1>
-<p><code>GET /widget.png?key=DASH_KEY&amp;w=700&amp;theme=dark</code> dibuja el dashboard con <strong>fondo transparente</strong> al ancho pedido
-(240–2144 px; el alto sigue la proporción del Kindle), en tema <code>dark</code> (tarjetas oscuras, texto claro) o <code>light</code>
-(tarjetas blancas, texto negro, como el Kindle). Con <code>&amp;page=N</code> se elige la pantalla.</p>
+<p><code>GET /widget.png?key=DASH_KEY&amp;w=700&amp;theme=dark</code> dibuja las tarjetas del dashboard con <strong>fondo transparente</strong> al
+ancho pedido (240–2144 px), en tema <code>dark</code> (tarjetas oscuras, texto claro) o <code>light</code> (tarjetas blancas, texto
+negro, como el Kindle). Con <code>&amp;page=N</code> se elige la pantalla.</p>
+<p>El widget no lleva la cabecera de hora y fecha del Kindle (ya están en la barra de tareas) y su alto es el de las
+tarjetas, sin hueco abajo. Con <code>&amp;header=1</code> vuelve la cabecera y el alto sigue la proporción del Kindle.</p>
 <p><img src="capturas/widget.png" alt="Widget en tema oscuro sobre un fondo de escritorio"></p>
 <p>El skin de <code>Rainmeter/</code> lo descarga cada 5 minutos y lo pinta <strong>en el escritorio</strong>: encima del fondo de Windows y
 debajo de todas las ventanas. Un clic abre <code>/web</code>; el menú del botón derecho tiene «Abrir en el navegador» y
@@ -80,6 +82,14 @@ powershell -ExecutionPolicy Bypass -File Rainmeter\install.ps1 -Width 600 -Monit
 powershell -ExecutionPolicy Bypass -File Rainmeter\install.ps1 -Theme light                                # tema claro, como el Kindle
 </code></pre>
 <p>Sin <code>-ServerUrl</code>, el widget usa <code>http://localhost:3000</code>.</p>
+<h2 id="varias-pantallas-a-la-vez">Varias pantallas a la vez</h2>
+<p><code>-Page</code> elige la pantalla: <code>0</code> las métricas (por defecto) y <code>1</code> la red local. Rainmeter solo carga una piel por
+carpeta, así que cada pantalla se instala en su propia carpeta y se pueden ver juntas: la <code>0</code> en
+<code>Skins\KindleDashboard</code> y la <code>N</code> en <code>Skins\KindleDashboard-Pantalla&lt;N+1&gt;</code>.</p>
+<pre><code class="language-powershell">powershell -ExecutionPolicy Bypass -File Rainmeter\install.ps1 -ServerUrl https://TU-APP.up.railway.app -Page 0 -Align 1   # métricas, a la derecha
+powershell -ExecutionPolicy Bypass -File Rainmeter\install.ps1 -ServerUrl https://TU-APP.up.railway.app -Page 1 -Align 0   # red local, a la izquierda
+</code></pre>
+<p>Para quitar una, descárgala desde Rainmeter (clic derecho → <strong>Descargar skin</strong>) o borra su carpeta.</p>
 <p>El instalador copia el skin a <code>Documentos\Rainmeter\Skins\KindleDashboard</code>, crea <code>@Resources\Variables.inc</code> con la
 <code>DASH_KEY</code> del <code>.env</code> del repositorio (o la de <code>-Key</code>) y lo carga. <code>Variables.inc</code> no se sube a git. Para cambiar
 algo a mano, edita ese archivo (servidor, clave, ancho, tema, monitor, lado, margen, frecuencia) y refresca el

@@ -3,6 +3,8 @@
 ; Servidor y clave del Kindle. Variables.inc no se sube a git.
 ServerUrl=CAMBIA_ESTO
 Key=CAMBIA_ESTO
+; Pantalla: 0 = metricas, 1 = red local.
+Page=0
 ; Ancho en pixeles; el alto sigue la proporcion del Kindle (1072x1448). 700 de ancho = 945 de alto.
 Width=700
 ; Tema: dark (tarjetas oscuras, texto claro) o light (tarjetas blancas, texto negro, como el Kindle).

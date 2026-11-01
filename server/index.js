@@ -93,16 +93,17 @@ async function dashPng(url, res) {
   send(res, 200, cache.png, 'image/png', { 'X-View': opts.view || 'grid' });
 }
 
-// Widget de escritorio: ?w=ancho en píxeles (la altura sigue la proporción del Kindle), ?page=N y ?theme=dark|light.
+// Widget de escritorio: ?w=ancho en píxeles, ?page=N, ?theme=dark|light y ?header=1 para incluir la hora y la fecha.
 let widgetCache = { key: '', at: 0, png: null };
 async function widgetPng(url, res) {
   const w = Math.round(Number(url.searchParams.get('w')) || 560);
   const width = Math.min(WIDGET_WIDTH.max, Math.max(WIDGET_WIDTH.min, w));
   const page = pageIndex(url.searchParams.get('page'));
   const theme = widgetTheme(url.searchParams.get('theme'));
-  const key = `${width}|${page}|${theme}`;
+  const withHeader = url.searchParams.get('header') === '1';
+  const key = `${width}|${page}|${theme}|${withHeader}`;
   if (!widgetCache.png || widgetCache.key !== key || Date.now() - widgetCache.at > 30_000) {
-    widgetCache = { key, at: Date.now(), png: await renderWidget(getState(), { width, page, theme, refreshMinutes: config.refreshMinutes }) };
+    widgetCache = { key, at: Date.now(), png: await renderWidget(getState(), { width, page, theme, header: withHeader, refreshMinutes: config.refreshMinutes }) };
   }
   send(res, 200, widgetCache.png, 'image/png');
 }
