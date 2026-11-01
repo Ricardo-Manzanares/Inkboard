@@ -40,6 +40,6 @@ están en línea y cuándo se vieron por última vez). Tarda unos 15 segundos. T
 
 ## Tarea programada
 
-`agent\install-task.ps1` registra la tarea **KindleDashAgent**, que ejecuta el agente cada 5 minutos sin
+`agent\install-task.ps1` registra la tarea **InkboardAgent**, que ejecuta el agente cada 5 minutos sin
 ventana. El log queda en `agent\agent.log` (rota a `agent.log.1` al pasar de 500 KB). Para quitarla, borra la
-tarea desde el Programador de tareas o con `Unregister-ScheduledTask KindleDashAgent`.
+tarea desde el Programador de tareas o con `Unregister-ScheduledTask InkboardAgent`.

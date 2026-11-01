@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kindle Dashboard</title>
+<title>Inkboard</title>
 <style>
 :root {
   --bg: #f4f7f6; --panel: #ffffff; --fg: #17201f; --muted: #5b6b69; --line: #d9e3e1;
@@ -54,23 +54,23 @@ blockquote { margin: 1em 0; padding: .2em 1em; border-left: 4px solid var(--acce
 <body>
 <div class="layout">
   <nav>
-    <a class="brand" href="index.html"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="3" width="28" height="38" rx="5" fill="var(--accent)"/><rect x="12" y="8" width="20" height="26" rx="2" fill="var(--panel)"/><rect x="14" y="10" width="16" height="9" rx="2" fill="var(--accent)"/><rect x="14" y="21" width="7" height="11" rx="2" fill="var(--accent)"/><rect x="23" y="21" width="7" height="11" rx="2" fill="var(--accent)"/></svg><b>Kindle Dashboard</b></a>
+    <a class="brand" href="index.html"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="3" width="28" height="38" rx="5" fill="var(--accent)"/><rect x="12" y="8" width="20" height="26" rx="2" fill="var(--panel)"/><rect x="14" y="10" width="16" height="9" rx="2" fill="var(--accent)"/><rect x="14" y="21" width="7" height="11" rx="2" fill="var(--accent)"/><rect x="23" y="21" width="7" height="11" rx="2" fill="var(--accent)"/></svg><b>Inkboard</b></a>
     <ul>
-      <li><a class="doc current" href="index.html">Kindle Dashboard</a></li>
+      <li><a class="doc current" href="index.html">Inkboard</a></li>
       <li><a class="doc" href="docs/servidor.html">Servidor</a></li>
       <li><a class="doc" href="docs/fuentes.html">Fuentes de datos</a></li>
       <li><a class="doc" href="docs/agente.html">Agente del PC</a></li>
       <li><a class="doc" href="docs/red-local.html">Red local</a></li>
       <li><a class="doc" href="docs/kindle.html">Kindle</a></li>
-      <li><a class="doc" href="docs/widget.html">Widget de escritorio</a></li>
+      <li><a class="doc" href="docs/rainmeter.html">Widgets de escritorio (Rainmeter)</a></li>
     </ul>
     <small>Vista previa generada a partir de README.md</small>
   </nav>
   <main><article>
-<h1 id="kindle-dashboard">Kindle Dashboard</h1>
-<p>Dashboard e-ink, para un Kindle con jailbreak: límites y tokens de Claude Code,
-Immich, Railway, Search Console, GitHub, gasto de Google Cloud y un mapa de los dispositivos de la red local.
-La misma imagen se ve en el navegador y como widget de escritorio en Windows (Rainmeter).</p>
+<h1 id="inkboard">Inkboard</h1>
+<p>Dashboard con estilo de tinta electrónica para un Kindle con jailbreak, el navegador y el escritorio de Windows
+(Rainmeter): límites y tokens de Claude Code, Immich, Railway, Search Console, GitHub, gasto de Google Cloud, un
+mapa de los dispositivos de la red local y la telemetría del PC.</p>
 <table>
 <thead>
 <tr>
@@ -85,7 +85,21 @@ La misma imagen se ve en el navegador y como widget de escritorio en Windows (Ra
 <td><img src="docs/capturas/detalle-red.png" alt="Lista de equipos con IP, conexión y tiempo conectado"></td>
 </tr>
 </tbody></table>
-<p>Capturas generadas con <code>npm run preview</code> y datos de ejemplo.</p>
+<table>
+<thead>
+<tr>
+<th>Escritorio: telemetría del PC</th>
+<th>Escritorio: red local</th>
+<th>Escritorio: métricas</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="docs/capturas/widget-telemetria.png" alt="Widget de Rainmeter con CPU, RAM, SWAP y discos"></td>
+<td><img src="docs/capturas/widget-red.png" alt="Widget de Rainmeter con la red local, fondo transparente"></td>
+<td><img src="docs/capturas/widget.png" alt="Widget de Rainmeter con las métricas, fondo transparente"></td>
+</tr>
+</tbody></table>
+<p>Capturas generadas con <code>npm run preview</code> y datos de ejemplo, salvo la de telemetría, que es del widget real.</p>
 <h2 id="qué-hace">Qué hace</h2>
 <ul>
 <li><strong>Tarjetas</strong> con lo que importa de cada servicio; al tocar una se abre su <strong>detalle</strong> a pantalla completa.</li>
@@ -94,7 +108,9 @@ La misma imagen se ve en el navegador y como widget de escritorio en Windows (Ra
 el anillo exterior, con su icono de tipo, IP y tiempo conectado. Sin credenciales del router.
 Explicado en <a href="docs/red-local.html">docs/red-local.md</a>.</li>
 <li><strong>Web</strong> (<code>/web</code>) con los mismos dashboards, protegida con su propia clave.</li>
-<li><strong>Widget de escritorio</strong> con fondo transparente, en tema claro u oscuro.</li>
+<li><strong>Widgets de escritorio</strong> (Rainmeter) con fondo transparente, en tema claro u oscuro: métricas, red local y
+telemetría del PC (CPU, RAM, SWAP y discos, leída del propio equipo cada segundo), que se pueden ver a la vez.
+Explicado en <a href="docs/rainmeter.html">docs/rainmeter.md</a>.</li>
 <li>Pantalla de <strong>sin conexión</strong> en el Kindle con la causa (sin red, clave incorrecta, servidor caído) y los pasos
 para arreglarlo.</li>
 </ul>
@@ -152,8 +168,8 @@ npm run preview                      # genera out/preview*.png con datos de ejem
 <td>Extensión KUAL, gestos, varias pantallas y detalle</td>
 </tr>
 <tr>
-<td><a href="docs/widget.html">Widget de escritorio</a></td>
-<td>Skin de Rainmeter con fondo transparente</td>
+<td><a href="docs/rainmeter.html">Widgets de escritorio</a></td>
+<td>Pieles de Rainmeter: métricas, red local y telemetría del PC</td>
 </tr>
 </tbody></table>
 <h2 id="estructura">Estructura</h2>
@@ -162,9 +178,9 @@ npm run preview                      # genera out/preview*.png con datos de ejem
   render/        tarjetas, detalles, diagrama de red y primitivas de UI para satori
 agent/           agente del PC (Claude Code, Immich, red local) y su tarea programada
 kindle/          extensión KUAL: bucle de descarga, gestos y pantalla de error
-Rainmeter/       skin del widget de escritorio y su instalador
+Rainmeter/       pieles de escritorio (Inkboard y Telemetria) y sus instaladores
 docs/            guías y capturas
-tools/           vista previa HTML de la documentación
+tools/           vista previa HTML de la documentación y generadores de la piel de telemetría
 </code></pre>
 <h2 id="documentación-en-el-navegador">Documentación en el navegador</h2>
 <p>Cada <code>.md</code> tiene al lado su <code>.html</code> (el README de la raíz, <code>index.html</code>) para leerla como páginas web:</p>

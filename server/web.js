@@ -76,7 +76,7 @@ ${body}
 
 function loginPage(nonce, error) {
   return page(
-    'Kindle Dashboard',
+    'Inkboard',
     `<body>
 <style nonce="${nonce}">
   main { max-width: 360px; margin: 18vh auto 0; padding: 0 16px; }
@@ -88,7 +88,7 @@ function loginPage(nonce, error) {
 </style>
 <main>
   <form method="post" action="/web/login">
-    <h1>Kindle Dashboard</h1>
+    <h1>Inkboard</h1>
     ${error ? '<p class="error">Clave incorrecta</p>' : ''}
     <label for="key">Clave de acceso</label>
     <input id="key" name="key" type="password" autocomplete="current-password" required autofocus>
@@ -102,7 +102,7 @@ function loginPage(nonce, error) {
 
 function dashboardPage(nonce) {
   return page(
-    'Kindle Dashboard',
+    'Inkboard',
     `<body>
 <style nonce="${nonce}">
   main { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 16px; }

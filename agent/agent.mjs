@@ -46,7 +46,7 @@ async function claudeLimits(prev) {
   // No se refresca el token aquí: rotarlo podría cerrar la sesión de Claude Code. Claude Code lo renueva al usarse.
   if (oauth.expiresAt && oauth.expiresAt < Date.now()) throw new Error('token OAuth caducado (abre Claude Code para renovarlo)');
   const res = await fetch('https://api.anthropic.com/api/oauth/usage', {
-    headers: { Authorization: `Bearer ${oauth.accessToken}`, 'anthropic-beta': 'oauth-2025-04-20', 'User-Agent': 'kindle-dashboard-agent' },
+    headers: { Authorization: `Bearer ${oauth.accessToken}`, 'anthropic-beta': 'oauth-2025-04-20', 'User-Agent': 'inkboard-agent' },
     signal: AbortSignal.timeout(15_000),
   });
   if (!res.ok) throw new Error(`usage ${res.status}`);

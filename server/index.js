@@ -134,5 +134,5 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(config.port, () => {
   const on = collectors.filter((c) => c.enabled).map((c) => c.name);
-  console.log(`kindle-dashboard en :${config.port} · colectores: ${on.join(', ') || 'ninguno'}`);
+  console.log(`inkboard en :${config.port} · colectores: ${on.join(', ') || 'ninguno'}`);
 });

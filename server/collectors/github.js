@@ -20,7 +20,7 @@ const QUERY = `query($from: DateTime!, $to: DateTime!) {
 const headers = () => ({
   Authorization: `Bearer ${config.github.token}`,
   Accept: 'application/vnd.github+json',
-  'User-Agent': 'kindle-dashboard',
+  'User-Agent': 'inkboard',
 });
 
 async function rest(pathname) {

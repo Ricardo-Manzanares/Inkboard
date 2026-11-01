@@ -56,7 +56,7 @@ El log queda en `data\server.log`. El Kindle apunta a `http://<ip-del-pc>:3000/d
 | Ruta | Clave | Qué hace |
 |---|---|---|
 | `GET /dash.png?page=N&view=…&tap=x,y` | `DASH_KEY` | Imagen del Kindle; la vista resultante vuelve en la cabecera `X-View` |
-| `GET /widget.png?w=700&theme=dark` | `DASH_KEY` | Widget con fondo transparente (ver [widget](widget.md)) |
+| `GET /widget.png?w=700&theme=dark` | `DASH_KEY` | Widget con fondo transparente (ver [Rainmeter](rainmeter.md)) |
 | `GET /web` | `WEB_KEY` | Los dashboards en el navegador |
 | `POST /api/ingest` | `INGEST_TOKEN` | Recibe `claude`, `immich`, `network` y `mcp` del agente |
 | `POST /api/refresh` | `DASH_KEY` | Fuerza la recogida de las fuentes de la nube |

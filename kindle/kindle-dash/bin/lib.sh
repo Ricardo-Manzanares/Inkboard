@@ -87,7 +87,7 @@ offline_screen() {
   line 620 48 "**Cómo recuperarlo**"
   if [ "$lan" = "1" ]; then
     line 720 38 "**1.** Enciende el PC y arranca el servidor:"
-    line 775 38 "     cd C:\GitHub\kindle-dashboard"
+    line 775 38 "     cd <carpeta de Inkboard>"
     line 830 38 "     npm start"
   else
     line 720 38 "**1.** Comprueba en el navegador que el servidor responde:"

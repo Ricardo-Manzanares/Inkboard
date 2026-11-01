@@ -1,8 +1,8 @@
-﻿# Registra la tarea "KindleDashAgent": ejecuta el agente cada 5 minutos mientras el PC esté encendido y la sesión iniciada.
+﻿# Registra la tarea "InkboardAgent": ejecuta el agente cada 5 minutos mientras el PC esté encendido y la sesión iniciada.
 # Uso: powershell -ExecutionPolicy Bypass -File agent\install-task.ps1   (con -Remove para quitarla)
 param([switch]$Remove, [int]$Minutes = 5)
 
-$name = 'KindleDashAgent'
+$name = 'InkboardAgent'
 if ($Remove) {
     Unregister-ScheduledTask -TaskName $name -Confirm:$false
     "Tarea $name eliminada"
@@ -21,5 +21,5 @@ $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatt
     -ExecutionTimeLimit (New-TimeSpan -Minutes 2) -MultipleInstances IgnoreNew
 
 Register-ScheduledTask -TaskName $name -Action $action -Trigger @($trigger, $logon) -Settings $settings `
-    -Description 'Envía uso de Claude Code, estado de Immich y dispositivos de la red local al dashboard del Kindle' -Force | Out-Null
+    -Description 'Envía uso de Claude Code, estado de Immich y dispositivos de la red local a Inkboard' -Force | Out-Null
 "Tarea $name registrada (cada $Minutes min). Log: $PSScriptRoot\agent.log"

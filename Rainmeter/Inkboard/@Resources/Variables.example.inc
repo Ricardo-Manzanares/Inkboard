@@ -9,6 +9,8 @@ Page=0
 Width=700
 ; Tema: dark (tarjetas oscuras, texto claro) o light (tarjetas blancas, texto negro, como el Kindle).
 Theme=dark
+; Desplazamiento horizontal desde el borde, para poner varios widgets en fila (p. ej. el ancho de otro + 24).
+OffsetX=0
 ; Monitor de Rainmeter (1 = el primero), lado (1 = derecha, 0 = izquierda) y separacion del borde.
 Monitor=1
 Align=1

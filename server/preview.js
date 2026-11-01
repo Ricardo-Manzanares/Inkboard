@@ -38,7 +38,7 @@ const sample = {
       estimatedUsd: 9.1,
       breakdown: [{ label: 'CPU', usd: 1.9 }, { label: 'RAM', usd: 2.71 }, { label: 'Red', usd: 0.18 }, { label: 'Disco', usd: 0.03 }],
       services: [
-        { name: 'kindle-dashboard', status: 'SUCCESS' },
+        { name: 'inkboard', status: 'SUCCESS' },
         { name: 'api', status: 'SUCCESS' },
         { name: 'postgres', status: 'SUCCESS' },
         { name: 'worker', status: 'FAILED' },

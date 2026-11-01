@@ -24,7 +24,7 @@ const htmlFor = (md) => (md === "README.md" ? "index.html" : md.replace(/\.md$/i
 const rel = (from, to) => path.posix.relative(path.posix.dirname(from), to) || path.posix.basename(to);
 
 // Orden del menú: la portada y las guías en el orden de puesta en marcha.
-const ORDER = ["README.md", "docs/servidor.md", "docs/fuentes.md", "docs/agente.md", "docs/red-local.md", "docs/kindle.md", "docs/widget.md"];
+const ORDER = ["README.md", "docs/servidor.md", "docs/fuentes.md", "docs/agente.md", "docs/red-local.md", "docs/kindle.md", "docs/rainmeter.md"];
 const docs = findDocs(ROOT, []).sort((a, b) => {
   const ia = ORDER.indexOf(a), ib = ORDER.indexOf(b);
   return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b);
@@ -137,7 +137,7 @@ function page(md) {
 <body>
 <div class="layout">
   <nav>
-    <a class="brand" href="${rel(out, "index.html")}">${LOGO}<b>Kindle Dashboard</b></a>
+    <a class="brand" href="${rel(out, "index.html")}">${LOGO}<b>Inkboard</b></a>
     <ul>
       ${nav}
     </ul>

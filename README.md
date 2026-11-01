@@ -1,14 +1,18 @@
-# Kindle Dashboard
+# Inkboard
 
-Dashboard e-ink, para un Kindle con jailbreak: límites y tokens de Claude Code,
-Immich, Railway, Search Console, GitHub, gasto de Google Cloud y un mapa de los dispositivos de la red local.
-La misma imagen se ve en el navegador y como widget de escritorio en Windows (Rainmeter).
+Dashboard con estilo de tinta electrónica para un Kindle con jailbreak, el navegador y el escritorio de Windows
+(Rainmeter): límites y tokens de Claude Code, Immich, Railway, Search Console, GitHub, gasto de Google Cloud, un
+mapa de los dispositivos de la red local y la telemetría del PC.
 
 | Pantalla 1: métricas | Pantalla 2: red local | Detalle de la red |
 |---|---|---|
 | ![Tarjetas de Claude Code, Immich, Railway, Search Console, GitHub y Google Cloud](docs/capturas/pantalla-1.png) | ![Diagrama radial de la red local](docs/capturas/pantalla-2-red.png) | ![Lista de equipos con IP, conexión y tiempo conectado](docs/capturas/detalle-red.png) |
 
-Capturas generadas con `npm run preview` y datos de ejemplo.
+| Escritorio: telemetría del PC | Escritorio: red local | Escritorio: métricas |
+|---|---|---|
+| ![Widget de Rainmeter con CPU, RAM, SWAP y discos](docs/capturas/widget-telemetria.png) | ![Widget de Rainmeter con la red local, fondo transparente](docs/capturas/widget-red.png) | ![Widget de Rainmeter con las métricas, fondo transparente](docs/capturas/widget.png) |
+
+Capturas generadas con `npm run preview` y datos de ejemplo, salvo la de telemetría, que es del widget real.
 
 ## Qué hace
 
@@ -18,7 +22,9 @@ Capturas generadas con `npm run preview` y datos de ejemplo.
   el anillo exterior, con su icono de tipo, IP y tiempo conectado. Sin credenciales del router.
   Explicado en [docs/red-local.md](docs/red-local.md).
 - **Web** (`/web`) con los mismos dashboards, protegida con su propia clave.
-- **Widget de escritorio** con fondo transparente, en tema claro u oscuro.
+- **Widgets de escritorio** (Rainmeter) con fondo transparente, en tema claro u oscuro: métricas, red local y
+  telemetría del PC (CPU, RAM, SWAP y discos, leída del propio equipo cada segundo), que se pueden ver a la vez.
+  Explicado en [docs/rainmeter.md](docs/rainmeter.md).
 - Pantalla de **sin conexión** en el Kindle con la causa (sin red, clave incorrecta, servidor caído) y los pasos
   para arreglarlo.
 
@@ -62,7 +68,7 @@ Después, cada parte tiene su guía:
 | [Agente del PC](docs/agente.md) | Claude Code, Immich, red local y tarea programada |
 | [Red local](docs/red-local.md) | Cómo se descubren los equipos, inventario y límites |
 | [Kindle](docs/kindle.md) | Extensión KUAL, gestos, varias pantallas y detalle |
-| [Widget de escritorio](docs/widget.md) | Skin de Rainmeter con fondo transparente |
+| [Widgets de escritorio](docs/rainmeter.md) | Pieles de Rainmeter: métricas, red local y telemetría del PC |
 
 ## Estructura
 
@@ -72,9 +78,9 @@ server/          servidor HTTP: recogida de las fuentes en la nube, estado y ren
   render/        tarjetas, detalles, diagrama de red y primitivas de UI para satori
 agent/           agente del PC (Claude Code, Immich, red local) y su tarea programada
 kindle/          extensión KUAL: bucle de descarga, gestos y pantalla de error
-Rainmeter/       skin del widget de escritorio y su instalador
+Rainmeter/       pieles de escritorio (Inkboard y Telemetria) y sus instaladores
 docs/            guías y capturas
-tools/           vista previa HTML de la documentación
+tools/           vista previa HTML de la documentación y generadores de la piel de telemetría
 ```
 
 ## Documentación en el navegador

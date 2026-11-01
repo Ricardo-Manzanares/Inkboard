@@ -7,5 +7,7 @@ agent/state.json
 agent/devices.json
 agent/agent.log*
 kindle/kindle-dash/config.sh
-Rainmeter/KindleDashboard/@Resources/Variables.inc
-Rainmeter/KindleDashboard/DownloadFile/
+Rainmeter/Inkboard/@Resources/Variables.inc
+Rainmeter/Inkboard/DownloadFile/
+Rainmeter/Telemetria/@Resources/Variables.inc
+Rainmeter/Telemetria/@Resources/Disks.inc

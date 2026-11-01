@@ -1,10 +1,10 @@
-﻿# Registra la tarea "KindleDashServer": arranca el servidor del dashboard al iniciar sesión en Windows.
+﻿# Registra la tarea "InkboardServer": arranca el servidor de Inkboard al iniciar sesión en Windows.
 # Solo para el modo local (mientras no esté en Railway). Uso:
 #   powershell -ExecutionPolicy Bypass -File server\install-task.ps1          (registrar)
 #   powershell -ExecutionPolicy Bypass -File server\install-task.ps1 -Remove  (quitar)
 param([switch]$Remove)
 
-$name = 'KindleDashServer'
+$name = 'InkboardServer'
 if ($Remove) {
     Unregister-ScheduledTask -TaskName $name -Confirm:$false
     "Tarea $name eliminada"
@@ -25,5 +25,5 @@ $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatt
     -ExecutionTimeLimit ([TimeSpan]::Zero) -RestartCount 5 -RestartInterval (New-TimeSpan -Minutes 1) -MultipleInstances IgnoreNew
 
 Register-ScheduledTask -TaskName $name -Action $action -Trigger $trigger -Settings $settings `
-    -Description 'Servidor local del dashboard del Kindle (puerto 3000)' -Force | Out-Null
+    -Description 'Servidor local de Inkboard (puerto 3000)' -Force | Out-Null
 "Tarea $name registrada: arranca al iniciar sesión. Log: $root\data\server.log"
