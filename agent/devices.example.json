@@ -1,5 +1,37 @@
+// Copia este archivo como devices.json (no se sube a git). Inventario de la red local. Admite comentarios con // o /* */.
+//
+// mac     obligatorio, con ":" o "-" (sale en la lista de detalle del dashboard)
+// name    nombre que se muestra
+// type    icono y tipo:
+//           router     router / puerta de enlace
+//           ap         punto de acceso, repetidor o nodo mesh
+//           switch     switch
+//           powerline  adaptador PLC
+//           tv         televisor
+//           streamer   reproductor (Fire TV, Chromecast, Android TV box, Apple TV)
+//           pc         ordenador de sobremesa
+//           laptop     portátil
+//           tablet     tablet
+//           phone      móvil
+//           ereader    lector de libros (Kindle, Kobo)
+//           console    videoconsola
+//           printer    impresora
+//           speaker    altavoz o barra de sonido
+//           camera     cámara o videoportero
+//           nas        NAS
+//           server     servidor, Raspberry Pi, Home Assistant
+//           iot        domótica en general (caldera, termostato, sensores)
+//           light      luz o bombilla
+//           plug       enchufe inteligente
+//           watch      reloj
+// link    conexión:
+//           wifi       por Wi-Fi
+//           ethernet   por cable
+//           (sin link) va al grupo "Red local, conexión sin indicar"
+// parent  opcional: MAC del repetidor, switch o PLC del que cuelga, o "router".
+//         Sin parent, el equipo va al grupo Wi-Fi o Ethernet según su link.
+// sleeps  opcional: true si se apaga o duerme a menudo; desconectado no cuenta como aviso.
 {
-  "_ayuda": "Copia este archivo como devices.json. mac obligatoria; type: router, ap, switch, powerline, tv, streamer, pc, laptop, tablet, phone, ereader, console, printer, speaker, camera, nas, server, iot, light, plug, watch; link: wifi o ethernet; parent: MAC del repetidor o switch del que cuelga, o router; sleeps: true si se apaga o duerme a menudo (no cuenta como aviso).",
   "devices": [
     { "mac": "aa:bb:cc:00:00:01", "name": "Repetidor planta alta", "type": "ap", "link": "ethernet", "parent": "router" },
     { "mac": "aa:bb:cc:00:00:02", "name": "Switch salón", "type": "switch", "link": "ethernet", "parent": "router" },

@@ -107,15 +107,25 @@ function dashboardPage(nonce) {
 <style nonce="${nonce}">
   main { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 16px; }
   #screen { width: min(100%, calc((100vh - 70px) * ${WIDTH} / ${HEIGHT})); aspect-ratio: ${WIDTH} / ${HEIGHT};
-            border-radius: 12px; overflow: hidden; background: #d6d6d6; touch-action: pan-y; cursor: pointer; }
-  #screen img { width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; }
+            border-radius: 12px; overflow: hidden; background: #d6d6d6; touch-action: pan-y; cursor: pointer; position: relative; }
+  #screen img { width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; transition: opacity .15s; }
+  /* Sin imagen todavía, el navegador pintaría el icono de imagen rota con el texto alternativo. */
+  #screen img:not([src]) { visibility: hidden; }
+  #loader { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center;
+            gap: 14px; color: #4a4a4a; font-size: 15px; pointer-events: none; }
+  #loader i { width: 34px; height: 34px; border-radius: 50%; border: 4px solid #b0b0b0; border-top-color: #1a1a1a;
+              animation: spin .8s linear infinite; }
+  #screen.loading #loader { display: flex; }
+  #screen.loading img[src] { opacity: .45; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { #loader i { animation-duration: 2.4s; } }
   nav { display: flex; gap: 8px; align-items: center; color: var(--dim); font-size: 14px; flex-wrap: wrap; justify-content: center; }
   button { font: inherit; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--dim); background: transparent; color: inherit; cursor: pointer; }
   button:disabled { opacity: .4; cursor: default; }
   #status { min-width: 9em; text-align: center; }
 </style>
 <main>
-  <div id="screen" role="img" aria-label="Dashboard"><img id="img" alt="Dashboard"></div>
+  <div id="screen" class="loading" role="img" aria-label="Dashboard" aria-busy="true"><img id="img" alt="Dashboard"><div id="loader"><i></i><span>Cargando dashboard…</span></div></div>
   <nav>
     <button id="prev" type="button" aria-label="Pantalla anterior">←</button>
     <button id="back" type="button">Volver</button>
@@ -134,6 +144,8 @@ function dashboardPage(nonce) {
     if (busy) return;
     busy = true;
     $('status').textContent = 'cargando…';
+    $('screen').classList.add('loading');
+    $('screen').setAttribute('aria-busy', 'true');
     try {
       const q = new URLSearchParams({ page: state.page, view: state.view });
       if (tap) q.set('tap', tap.map(Math.round).join(','));
@@ -153,6 +165,8 @@ function dashboardPage(nonce) {
       $('status').textContent = 'error al cargar';
     } finally {
       busy = false;
+      $('screen').classList.remove('loading');
+      $('screen').setAttribute('aria-busy', 'false');
     }
   }
 

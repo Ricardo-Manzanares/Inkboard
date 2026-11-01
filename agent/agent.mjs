@@ -195,12 +195,13 @@ async function main() {
 
   if (process.env.NET_SCAN !== '0') {
     try {
-      const { result, store } = await scanNetwork(saved.network, {
+      const { result, store, warnings } = await scanNetwork(saved.network, {
         inventoryFile: path.join(here, 'devices.json'),
         forgetDays: Number(process.env.NET_FORGET_DAYS) || 7,
       });
       payload.network = result;
       saved.network = store;
+      warnings.forEach(log);
     } catch (err) {
       log(`red: ${err.message}`);
     }

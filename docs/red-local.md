@@ -77,6 +77,8 @@ copy agent\devices.example.json agent\devices.json
 | `parent` | MAC del repetidor, switch o PLC del que cuelga, o `router`. Sin `parent`, va al grupo Wi-Fi o Ethernet |
 | `sleeps` | `true` si se apaga o duerme a menudo (Kindle, tablets): desconectado no cuenta como aviso |
 
+El archivo admite comentarios `//` y `/* */`; la plantilla lleva arriba la lista de tipos y conexiones.
+
 Las MAC de los equipos nuevos salen en la lista de detalle y en `node agent\agent.mjs --dry-run`; las últimas
 cifras aparecen también en el nombre provisional (`Espressif 6f:7c`, `Equipo 34:4f`).
 

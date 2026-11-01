@@ -283,7 +283,7 @@ function summaryChips(devices) {
   return row(
     { gap: 10, flexWrap: 'wrap' },
     chip(`${c.online} en línea`, { inverted: true }),
-    c.recent > 0 && chip(`${c.recent} desconectados < 24 h`),
+    c.recent > 0 && chip(`${c.recent} ${c.recent === 1 ? "desconectado" : "desconectados"} < 24 h`),
     c.stale + c.never > 0 && chip(`${c.stale + c.never} sin ver 24 h+`),
     c.unknown > 0 && chip(`${c.unknown} sin identificar`),
   );

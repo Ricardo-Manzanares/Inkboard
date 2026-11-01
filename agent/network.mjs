@@ -280,10 +280,13 @@ const VENDORS = new Map(ESPRESSIF.split(' ').map((p) => [p, { vendor: 'Espressif
 const vendorOf = (mac) => VENDORS.get(mac.slice(0, 8)) || null;
 
 // --- inventario --------------------------------------------------------------------------------
-// agent/devices.json (no se sube a git): nombre, tipo, conexión y de qué equipo cuelga cada MAC.
+// Quita los comentarios // y /* */ de un JSON, sin tocar el texto entre comillas (p. ej. "Tele 24\"").
+const stripComments = (src) => src.replace(/("(?:\\.|[^"\\])*")|\/\/[^\n]*|\/\*[\s\S]*?\*\//g, (m, str) => str ?? '');
+
+// agent/devices.json (no se sube a git): nombre, tipo, conexión y de qué equipo cuelga cada MAC. Admite comentarios.
 export function loadInventory(file) {
   try {
-    const j = JSON.parse(fs.readFileSync(file, 'utf8'));
+    const j = JSON.parse(stripComments(fs.readFileSync(file, 'utf8').replace(/^﻿/, '')));
     const list = Array.isArray(j) ? j : j.devices || [];
     return new Map(list.filter((d) => d.mac).map((d) => [normMac(d.mac), { ...d, mac: normMac(d.mac) }]));
   } catch (err) {
@@ -378,7 +381,20 @@ export async function scanNetwork(prev = {}, { inventoryFile, forgetDays = 7, ga
       lastSeen,
     });
   }
-  return { result: { scannedAt: nowIso, subnet, gateway, devices }, store: { scannedAt: nowIso, devices: store } };
+  return { result: { scannedAt: nowIso, subnet, gateway, devices }, store: { scannedAt: nowIso, devices: store }, warnings: typoWarnings(devices) };
+}
+
+// Una MAC del inventario que nunca se ha visto y se parece mucho a la de un equipo sin identificar en línea
+// suele ser una errata al copiarla (4f por af, 0 por o...).
+function typoWarnings(devices) {
+  const diff = (a, b) => [...a].reduce((n, c, i) => n + (c !== b[i]), 0);
+  const unknown = devices.filter((d) => d.online && !d.known);
+  const out = [];
+  for (const d of devices.filter((x) => x.known && !x.lastSeen && !x.gateway && !x.self)) {
+    const near = unknown.find((u) => u.mac.length === d.mac.length && diff(u.mac, d.mac) <= 2);
+    if (near) out.push(`devices.json: ${d.mac} (${d.name || 'sin nombre'}) nunca se ha visto; ¿quisiste decir ${near.mac} (${near.ip})?`);
+  }
+  return out;
 }
 
 // El padre se indica con la MAC del equipo del que cuelga (repetidor, switch...) o con "router".
