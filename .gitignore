@@ -1,0 +1,11 @@
+node_modules/
+out/
+data/
+.env
+agent/.env
+agent/state.json
+agent/devices.json
+agent/agent.log*
+kindle/kindle-dash/config.sh
+Rainmeter/KindleDashboard/@Resources/Variables.inc
+Rainmeter/KindleDashboard/DownloadFile/

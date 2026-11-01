@@ -1,0 +1,27 @@
+{
+  "name": "kindle-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dashboard e-ink para Kindle: recibe métricas, las guarda en JSON y las sirve como PNG",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node --max-old-space-size=128 server/index.js",
+    "preview": "node server/preview.js",
+    "agent": "node agent/agent.mjs",
+    "docs": "node tools/docs-preview.js"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@mdi/js": "^7.4.47",
+    "google-auth-library": "^11.3.1",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "marked": "^12.0.2"
+  },
+  "license": "MIT"
+}

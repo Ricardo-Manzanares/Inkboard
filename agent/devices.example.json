@@ -1,0 +1,11 @@
+{
+  "_ayuda": "Copia este archivo como devices.json. mac obligatoria; type: router, ap, switch, powerline, tv, streamer, pc, laptop, tablet, phone, ereader, console, printer, speaker, camera, nas, server, iot, light, plug, watch; link: wifi o ethernet; parent: MAC del repetidor o switch del que cuelga, o router; sleeps: true si se apaga o duerme a menudo (no cuenta como aviso).",
+  "devices": [
+    { "mac": "aa:bb:cc:00:00:01", "name": "Repetidor planta alta", "type": "ap", "link": "ethernet", "parent": "router" },
+    { "mac": "aa:bb:cc:00:00:02", "name": "Switch salón", "type": "switch", "link": "ethernet", "parent": "router" },
+    { "mac": "aa:bb:cc:00:00:10", "name": "Tele salón", "type": "tv", "link": "ethernet", "parent": "aa:bb:cc:00:00:02" },
+    { "mac": "aa:bb:cc:00:00:11", "name": "Portátil", "type": "laptop", "link": "wifi", "parent": "aa:bb:cc:00:00:01" },
+    { "mac": "aa:bb:cc:00:00:12", "name": "Móvil", "type": "phone", "link": "wifi" },
+    { "mac": "aa:bb:cc:00:00:13", "name": "Kindle", "type": "ereader", "link": "wifi", "sleeps": true }
+  ]
+}

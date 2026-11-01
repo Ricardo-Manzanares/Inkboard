@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "name": "Kindle Dash",
+      "priority": 0,
+      "items": [
+        { "name": "Iniciar dashboard", "priority": 1, "action": "/bin/sh", "params": "/mnt/us/extensions/kindle-dash/bin/start.sh", "exitmenu": true },
+        { "name": "Refrescar una vez", "priority": 2, "action": "/bin/sh", "params": "/mnt/us/extensions/kindle-dash/bin/refresh.sh", "exitmenu": true },
+        { "name": "Parar dashboard", "priority": 3, "action": "/bin/sh", "params": "/mnt/us/extensions/kindle-dash/bin/stop.sh" }
+      ]
+    }
+  ]
+}

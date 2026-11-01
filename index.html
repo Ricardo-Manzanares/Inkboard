@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kindle Dashboard</title>
+<style>
+:root {
+  --bg: #f4f7f6; --panel: #ffffff; --fg: #17201f; --muted: #5b6b69; --line: #d9e3e1;
+  --accent: #0b8783; --accent-soft: #e3f3f1; --code: #eef3f2;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f1716; --panel: #162120; --fg: #e6eeec; --muted: #93a5a2; --line: #263533;
+          --accent: #3cc7b0; --accent-soft: #173431; --code: #1b2a28; color-scheme: dark; }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.6 Inter, "Segoe UI", system-ui, sans-serif; }
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); min-height: 100vh; }
+nav { background: var(--panel); border-right: 1px solid var(--line); padding: 28px 20px;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; text-decoration: none; color: var(--fg); }
+.brand svg { width: 44px; height: 44px; flex: none; }
+.brand b { font-size: 19px; letter-spacing: .01em; }
+nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+nav a.doc { display: block; padding: 8px 12px; border-radius: 8px; color: var(--fg); text-decoration: none; font-size: 15px; }
+nav a.doc:hover { background: var(--accent-soft); }
+nav a.doc.current { background: var(--accent); color: #fff; }
+nav small { display: block; color: var(--muted); font-size: 12px; margin: 22px 12px 0; }
+main { padding: 40px max(24px, 4vw) 80px; min-width: 0; }
+article { max-width: 920px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 16px; padding: 36px 44px; }
+h1, h2, h3 { line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 34px; margin-top: 0; }
+h2 { font-size: 24px; margin-top: 2em; padding-bottom: .3em; border-bottom: 1px solid var(--line); }
+h3 { font-size: 19px; margin-top: 1.6em; }
+a { color: var(--accent); }
+img { max-width: 100%; height: auto; border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; margin: 1em 0; font-size: 15px; }
+th, td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+th { background: var(--accent-soft); }
+code { font-family: "Cascadia Mono", Consolas, ui-monospace, monospace; font-size: .9em;
+  background: var(--code); padding: .1em .35em; border-radius: 5px; }
+pre { background: var(--code); padding: 16px 18px; border-radius: 10px; overflow-x: auto; }
+pre code { background: none; padding: 0; font-size: 14px; }
+blockquote { margin: 1em 0; padding: .2em 1em; border-left: 4px solid var(--accent); color: var(--muted); }
+@media (max-width: 820px) {
+  .layout { grid-template-columns: 1fr; }
+  nav { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  article { padding: 24px 20px; }
+}</style>
+</head>
+<body>
+<div class="layout">
+  <nav>
+    <a class="brand" href="index.html"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="3" width="28" height="38" rx="5" fill="var(--accent)"/><rect x="12" y="8" width="20" height="26" rx="2" fill="var(--panel)"/><rect x="14" y="10" width="16" height="9" rx="2" fill="var(--accent)"/><rect x="14" y="21" width="7" height="11" rx="2" fill="var(--accent)"/><rect x="23" y="21" width="7" height="11" rx="2" fill="var(--accent)"/></svg><b>Kindle Dashboard</b></a>
+    <ul>
+      <li><a class="doc current" href="index.html">Kindle Dashboard</a></li>
+      <li><a class="doc" href="docs/servidor.html">Servidor</a></li>
+      <li><a class="doc" href="docs/fuentes.html">Fuentes de datos</a></li>
+      <li><a class="doc" href="docs/agente.html">Agente del PC</a></li>
+      <li><a class="doc" href="docs/red-local.html">Red local</a></li>
+      <li><a class="doc" href="docs/kindle.html">Kindle</a></li>
+      <li><a class="doc" href="docs/widget.html">Widget de escritorio</a></li>
+    </ul>
+    <small>Vista previa generada a partir de README.md</small>
+  </nav>
+  <main><article>
+<h1 id="kindle-dashboard">Kindle Dashboard</h1>
+<p>Dashboard e-ink, al estilo de Home Assistant, para un Kindle con jailbreak: límites y tokens de Claude Code,
+Immich, Railway, Search Console, GitHub, gasto de Google Cloud y un mapa de los dispositivos de la red local.
+La misma imagen se ve en el navegador y como widget de escritorio en Windows (Rainmeter).</p>
+<table>
+<thead>
+<tr>
+<th>Pantalla 1: métricas</th>
+<th>Pantalla 2: red local</th>
+<th>Detalle de la red</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="docs/capturas/pantalla-1.png" alt="Tarjetas de Claude Code, Immich, Railway, Search Console, GitHub y Google Cloud"></td>
+<td><img src="docs/capturas/pantalla-2-red.png" alt="Diagrama radial de la red local"></td>
+<td><img src="docs/capturas/detalle-red.png" alt="Lista de equipos con IP, conexión y tiempo conectado"></td>
+</tr>
+</tbody></table>
+<p>Capturas generadas con <code>npm run preview</code> y datos de ejemplo.</p>
+<h2 id="qué-hace">Qué hace</h2>
+<ul>
+<li><strong>Tarjetas</strong> con lo que importa de cada servicio; al tocar una se abre su <strong>detalle</strong> a pantalla completa.</li>
+<li><strong>Varias pantallas</strong>: se desliza a izquierda y derecha, con un indicador de página en la cabecera.</li>
+<li><strong>Red local</strong>: diagrama radial con el router en el centro, repetidores y switches alrededor y cada equipo en
+el anillo exterior, con su icono de tipo, IP y tiempo conectado. Sin credenciales del router.
+Explicado en <a href="docs/red-local.html">docs/red-local.md</a>.</li>
+<li><strong>Web</strong> (<code>/web</code>) con los mismos dashboards, protegida con su propia clave.</li>
+<li><strong>Widget de escritorio</strong> con fondo transparente, en tema claro u oscuro.</li>
+<li>Pantalla de <strong>sin conexión</strong> en el Kindle con la causa (sin red, clave incorrecta, servidor caído) y los pasos
+para arreglarlo.</li>
+</ul>
+<h2 id="cómo-funciona">Cómo funciona</h2>
+<pre><code>PC (cuando está encendido)              Servidor (Railway o el propio PC)           Kindle
+agent/agent.mjs  ──POST /api/ingest──▶  server/index.js ── data/state.json
+ · límites y tokens de Claude Code       · GitHub, Search Console, Railway,
+ · Immich                                  gasto de Google Cloud (cada N min)
+ · dispositivos de la red local          · GET /dash.png  ◀──────── cada 5 min ──── eips
+                                         · GET /web, /widget.png
+</code></pre>
+<ul>
+<li>El <strong>servidor</strong> guarda el último dato de cada fuente en un JSON y dibuja la imagen al pedirla: tarjetas en
+<a href="https://github.com/vercel/satori" target="_blank" rel="noopener">satori</a> y PNG de 8 bits en gris con <a href="https://sharp.pixelplumbing.com" target="_blank" rel="noopener">sharp</a>,
+1072×1448, que el Kindle pinta con <code>eips</code> sin conversión.</li>
+<li>El <strong>agente del PC</strong> recoge lo que solo existe en local y lo envía con un token. Los secretos locales (token
+OAuth de Claude Code, clave de Immich) no salen del PC: al servidor solo llegan las cifras.</li>
+<li>El <strong>Kindle</strong> descarga la imagen cada pocos minutos con <code>curl</code> desde una extensión de KUAL y envía los toques
+como coordenadas; el servidor decide qué se ha tocado.</li>
+</ul>
+<h2 id="puesta-en-marcha">Puesta en marcha</h2>
+<p>Necesitas <strong>Node.js 22</strong> o superior en el PC (y en el servidor, si no es el mismo) y un Kindle con jailbreak,
+KUAL y acceso por SSH.</p>
+<pre><code class="language-powershell">npm install
+copy .env.example .env               # claves del servidor y tokens de cada fuente
+npm start                            # servidor en http://localhost:3000
+npm run preview                      # genera out/preview*.png con datos de ejemplo
+</code></pre>
+<p>Después, cada parte tiene su guía:</p>
+<table>
+<thead>
+<tr>
+<th>Guía</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="docs/servidor.html">Servidor</a></td>
+<td>Railway o PC local, variables, página web, memoria</td>
+</tr>
+<tr>
+<td><a href="docs/fuentes.html">Fuentes de datos</a></td>
+<td>GitHub, Search Console, gasto de Google Cloud y Railway</td>
+</tr>
+<tr>
+<td><a href="docs/agente.html">Agente del PC</a></td>
+<td>Claude Code, Immich, red local y tarea programada</td>
+</tr>
+<tr>
+<td><a href="docs/red-local.html">Red local</a></td>
+<td>Cómo se descubren los equipos, inventario y límites</td>
+</tr>
+<tr>
+<td><a href="docs/kindle.html">Kindle</a></td>
+<td>Extensión KUAL, gestos, varias pantallas y detalle</td>
+</tr>
+<tr>
+<td><a href="docs/widget.html">Widget de escritorio</a></td>
+<td>Skin de Rainmeter con fondo transparente</td>
+</tr>
+</tbody></table>
+<h2 id="estructura">Estructura</h2>
+<pre><code>server/          servidor HTTP: recogida de las fuentes en la nube, estado y render
+  collectors/    GitHub, Search Console, Railway y facturación de Google Cloud
+  render/        tarjetas, detalles, diagrama de red y primitivas de UI para satori
+agent/           agente del PC (Claude Code, Immich, red local) y su tarea programada
+kindle/          extensión KUAL: bucle de descarga, gestos y pantalla de error
+Rainmeter/       skin del widget de escritorio y su instalador
+docs/            guías y capturas
+tools/           vista previa HTML de la documentación
+</code></pre>
+<h2 id="documentación-en-el-navegador">Documentación en el navegador</h2>
+<p>Cada <code>.md</code> tiene al lado su <code>.html</code> (el README de la raíz, <code>index.html</code>) para leerla como páginas web:</p>
+<pre><code class="language-sh">npm install        # solo la primera vez
+npm run docs       # vuelve a generar los .html tras cambiar algún .md
+</code></pre>
+<h2 id="probado-con">Probado con</h2>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Versión</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Kindle</td>
+<td>Paperwhite 3 (7.ª generación), firmware 5.16, 1072×1448 a 300 ppi</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td>22 o superior</td>
+</tr>
+<tr>
+<td>Agente y widget</td>
+<td>Windows 11</td>
+</tr>
+</tbody></table>
+<h2 id="créditos">Créditos</h2>
+<ul>
+<li>Tipografía <a href="https://rsms.me/inter/" target="_blank" rel="noopener">Inter</a>, de Rasmus Andersson, bajo la
+<a href="https://openfontlicense.org" target="_blank" rel="noopener">SIL Open Font License 1.1</a> (paquete <code>@fontsource/inter</code>).</li>
+<li>Iconos de <a href="https://pictogrammers.com/library/mdi/" target="_blank" rel="noopener">Material Design Icons</a> (<code>@mdi/js</code>), bajo licencia
+<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache 2.0</a>.</li>
+<li><a href="https://github.com/vercel/satori" target="_blank" rel="noopener">satori</a> (MPL 2.0) y <a href="https://sharp.pixelplumbing.com" target="_blank" rel="noopener">sharp</a> (Apache 2.0)
+para el render.</li>
+<li>En el Kindle, los gestos y la pantalla de error usan el LuaJIT y FBInk que trae
+<a href="https://koreader.rocks" target="_blank" rel="noopener">KOReader</a> (AGPL 3.0); no se incluyen en este repositorio.</li>
+</ul>
+<h2 id="licencia">Licencia</h2>
+<p><a href="LICENSE">MIT</a>.</p>
+
+  </article></main>
+</div>
+</body>
+</html>

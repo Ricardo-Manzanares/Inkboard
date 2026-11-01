@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red local</title>
+<style>
+:root {
+  --bg: #f4f7f6; --panel: #ffffff; --fg: #17201f; --muted: #5b6b69; --line: #d9e3e1;
+  --accent: #0b8783; --accent-soft: #e3f3f1; --code: #eef3f2;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f1716; --panel: #162120; --fg: #e6eeec; --muted: #93a5a2; --line: #263533;
+          --accent: #3cc7b0; --accent-soft: #173431; --code: #1b2a28; color-scheme: dark; }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.6 Inter, "Segoe UI", system-ui, sans-serif; }
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); min-height: 100vh; }
+nav { background: var(--panel); border-right: 1px solid var(--line); padding: 28px 20px;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; text-decoration: none; color: var(--fg); }
+.brand svg { width: 44px; height: 44px; flex: none; }
+.brand b { font-size: 19px; letter-spacing: .01em; }
+nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+nav a.doc { display: block; padding: 8px 12px; border-radius: 8px; color: var(--fg); text-decoration: none; font-size: 15px; }
+nav a.doc:hover { background: var(--accent-soft); }
+nav a.doc.current { background: var(--accent); color: #fff; }
+nav small { display: block; color: var(--muted); font-size: 12px; margin: 22px 12px 0; }
+main { padding: 40px max(24px, 4vw) 80px; min-width: 0; }
+article { max-width: 920px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 16px; padding: 36px 44px; }
+h1, h2, h3 { line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 34px; margin-top: 0; }
+h2 { font-size: 24px; margin-top: 2em; padding-bottom: .3em; border-bottom: 1px solid var(--line); }
+h3 { font-size: 19px; margin-top: 1.6em; }
+a { color: var(--accent); }
+img { max-width: 100%; height: auto; border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; margin: 1em 0; font-size: 15px; }
+th, td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+th { background: var(--accent-soft); }
+code { font-family: "Cascadia Mono", Consolas, ui-monospace, monospace; font-size: .9em;
+  background: var(--code); padding: .1em .35em; border-radius: 5px; }
+pre { background: var(--code); padding: 16px 18px; border-radius: 10px; overflow-x: auto; }
+pre code { background: none; padding: 0; font-size: 14px; }
+blockquote { margin: 1em 0; padding: .2em 1em; border-left: 4px solid var(--accent); color: var(--muted); }
+@media (max-width: 820px) {
+  .layout { grid-template-columns: 1fr; }
+  nav { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  article { padding: 24px 20px; }
+}</style>
+</head>
+<body>
+<div class="layout">
+  <nav>
+    <a class="brand" href="../index.html"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="8" y="3" width="28" height="38" rx="5" fill="var(--accent)"/><rect x="12" y="8" width="20" height="26" rx="2" fill="var(--panel)"/><rect x="14" y="10" width="16" height="9" rx="2" fill="var(--accent)"/><rect x="14" y="21" width="7" height="11" rx="2" fill="var(--accent)"/><rect x="23" y="21" width="7" height="11" rx="2" fill="var(--accent)"/></svg><b>Kindle Dashboard</b></a>
+    <ul>
+      <li><a class="doc" href="../index.html">Kindle Dashboard</a></li>
+      <li><a class="doc" href="servidor.html">Servidor</a></li>
+      <li><a class="doc" href="fuentes.html">Fuentes de datos</a></li>
+      <li><a class="doc" href="agente.html">Agente del PC</a></li>
+      <li><a class="doc current" href="red-local.html">Red local</a></li>
+      <li><a class="doc" href="kindle.html">Kindle</a></li>
+      <li><a class="doc" href="widget.html">Widget de escritorio</a></li>
+    </ul>
+    <small>Vista previa generada a partir de docs/red-local.md</small>
+  </nav>
+  <main><article>
+<h1 id="red-local">Red local</h1>
+<p>La segunda pantalla dibuja los dispositivos de casa como un diagrama radial: el router en el centro, los
+repetidores, switches y PLC alrededor y cada equipo en el anillo exterior, con su icono de tipo, su IP y el
+tiempo que lleva conectado (o cuándo se vio por última vez). Al tocar el diagrama se abre la lista completa.</p>
+<table>
+<thead>
+<tr>
+<th>Diagrama</th>
+<th>Lista de equipos</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="capturas/pantalla-2-red.png" alt="Diagrama radial de la red local"></td>
+<td><img src="capturas/detalle-red.png" alt="Lista con IP, conexión y tiempo conectado"></td>
+</tr>
+</tbody></table>
+<h2 id="cómo-se-leen">Cómo se leen</h2>
+<table>
+<thead>
+<tr>
+<th>Forma</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Círculo negro, línea continua</td>
+<td>En línea en el último barrido</td>
+</tr>
+<tr>
+<td>Círculo blanco con borde, línea discontinua</td>
+<td>Desconectado hace menos de 24 h, o un equipo marcado con <code>sleeps</code></td>
+</tr>
+<tr>
+<td>Círculo gris discontinuo</td>
+<td>Sin ver desde hace 24 h o más</td>
+</tr>
+<tr>
+<td>Anillo punteado alrededor</td>
+<td>Sin identificar: no está en el inventario</td>
+</tr>
+<tr>
+<td>Nodo <strong>Wi-Fi</strong> / <strong>Ethernet</strong></td>
+<td>Grupos de los equipos del inventario que no cuelgan de un repetidor o switch concreto</td>
+</tr>
+<tr>
+<td>Nodo <strong>Sin identificar</strong></td>
+<td>Equipos que aparecen en la red y no están en el inventario</td>
+</tr>
+</tbody></table>
+<p>Las cifras de arriba cuentan los equipos en línea, los desconectados hace menos de 24 h, los que llevan más de
+un día sin verse y los que faltan por identificar.</p>
+<h2 id="de-dónde-salen-los-datos">De dónde salen los datos</h2>
+<p>Lo descubre el <a href="agente.html">agente del PC</a> (<code>agent/network.mjs</code>) en cada pasada, sin credenciales y sin cambiar
+nada en la red:</p>
+<ol>
+<li><p><strong>Sondeo ARP.</strong> Envía un datagrama UDP vacío a cada IP de la subred del PC. Para poder enviarlo, el sistema
+tiene que preguntar por ARP quién tiene esa IP, y todo equipo encendido responde a ARP aunque su cortafuegos
+ignore el ping: sin ARP no podría comunicarse en la red. Unos segundos después, las entradas <em>alcanzables</em>
+de la tabla de vecinos (<code>Get-NetNeighbor</code> en Windows, <code>ip neigh</code> en Linux) son los equipos en línea. En la
+práctica encuentra bastantes más equipos que un barrido con ping, que muchos móviles y aparatos de domótica
+ignoran.</p>
+</li>
+<li><p><strong>Nombres y tipo.</strong> Para cada equipo en línea se consultan, en paralelo y solo dentro de la subred:</p>
+<ul>
+<li><strong>mDNS</strong> (búsqueda inversa <code>d.c.b.a.in-addr.arpa</code>): móviles, Apple, Linux, impresoras, Android TV.</li>
+<li><strong>NetBIOS</strong> (consulta de estado, UDP 137): PCs con Windows y algunos NAS.</li>
+<li><strong>SSDP/UPnP</strong>: teles, reproductores, consolas y routers publican una descripción XML con nombre y modelo.
+Solo se lee la descripción servida por el propio equipo que respondió.</li>
+<li><strong>DNS inverso</strong> del router, si lo ofrece.</li>
+<li>El fabricante de la MAC para los chips más comunes en domótica (Espressif).</li>
+</ul>
+<p>Con esas pistas se adivina el tipo (televisor, móvil, impresora…), pero manda el inventario.</p>
+</li>
+<li><p><strong>Historial</strong> en <code>agent/state.json</code>: primera vez que se vio cada MAC, desde cuándo está en línea sin
+interrupción y la última vez que se vio.</p>
+</li>
+</ol>
+<p>Al servidor llega solo la lista resultante. Si el servidor está en la nube, ten en cuenta que esa lista (MAC,
+IP y nombres de tus equipos) se guarda allí, en <code>state.json</code>, protegida por <code>DASH_KEY</code> y <code>WEB_KEY</code>.</p>
+<h2 id="inventario-agentdevicesjson">Inventario: <code>agent/devices.json</code></h2>
+<p>El descubrimiento por la red no puede saber si un equipo va por <strong>Wi-Fi o por cable</strong>, ni de qué repetidor
+cuelga, y muchos equipos no anuncian un nombre útil. El inventario completa esa información y hace que los
+equipos apagados sigan apareciendo (como desconectados) en lugar de desaparecer:</p>
+<pre><code class="language-powershell">copy agent\devices.example.json agent\devices.json
+</code></pre>
+<pre><code class="language-json">{
+  &quot;devices&quot;: [
+    { &quot;mac&quot;: &quot;aa:bb:cc:00:00:01&quot;, &quot;name&quot;: &quot;Repetidor planta alta&quot;, &quot;type&quot;: &quot;ap&quot;, &quot;link&quot;: &quot;ethernet&quot;, &quot;parent&quot;: &quot;router&quot; },
+    { &quot;mac&quot;: &quot;aa:bb:cc:00:00:10&quot;, &quot;name&quot;: &quot;Tele salón&quot;, &quot;type&quot;: &quot;tv&quot;, &quot;link&quot;: &quot;ethernet&quot;, &quot;parent&quot;: &quot;aa:bb:cc:00:00:02&quot; },
+    { &quot;mac&quot;: &quot;aa:bb:cc:00:00:13&quot;, &quot;name&quot;: &quot;Kindle&quot;, &quot;type&quot;: &quot;ereader&quot;, &quot;link&quot;: &quot;wifi&quot;, &quot;sleeps&quot;: true }
+  ]
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valores</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mac</code></td>
+<td>Obligatorio, con <code>:</code> o <code>-</code></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>Nombre que se muestra</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>router</code>, <code>ap</code>, <code>switch</code>, <code>powerline</code>, <code>tv</code>, <code>streamer</code>, <code>pc</code>, <code>laptop</code>, <code>tablet</code>, <code>phone</code>, <code>ereader</code>, <code>console</code>, <code>printer</code>, <code>speaker</code>, <code>camera</code>, <code>nas</code>, <code>server</code>, <code>iot</code>, <code>light</code>, <code>plug</code>, <code>watch</code></td>
+</tr>
+<tr>
+<td><code>link</code></td>
+<td><code>wifi</code> o <code>ethernet</code></td>
+</tr>
+<tr>
+<td><code>parent</code></td>
+<td>MAC del repetidor, switch o PLC del que cuelga, o <code>router</code>. Sin <code>parent</code>, va al grupo Wi-Fi o Ethernet</td>
+</tr>
+<tr>
+<td><code>sleeps</code></td>
+<td><code>true</code> si se apaga o duerme a menudo (Kindle, tablets): desconectado no cuenta como aviso</td>
+</tr>
+</tbody></table>
+<p>Las MAC de los equipos nuevos salen en la lista de detalle y en <code>node agent\agent.mjs --dry-run</code>; las últimas
+cifras aparecen también en el nombre provisional (<code>Espressif 6f:7c</code>, <code>Equipo 34:4f</code>).</p>
+<p>Los móviles y tablets usan <strong>MAC privada</strong> por red (la lista lo indica). Suele ser fija para cada red Wi-Fi, así
+que sirve para el inventario; si un móvil la rota, aparecerá como equipo nuevo. Se puede desactivar en los
+ajustes Wi-Fi del móvil para la red de casa.</p>
+<h2 id="router-con-credenciales-o-descubrimiento-por-la-red">Router con credenciales o descubrimiento por la red</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Router con credenciales</th>
+<th>Descubrimiento por la red (lo que hace el agente)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Equipos encendidos</td>
+<td>Todos los que tienen concesión DHCP o están asociados a la Wi-Fi</td>
+<td>Todos los que responden a ARP en la subred del PC</td>
+</tr>
+<tr>
+<td>Equipos dormidos o apagados</td>
+<td>Siguen en la lista mientras dure la concesión</td>
+<td>Desaparecen; el inventario los mantiene como desconectados</td>
+</tr>
+<tr>
+<td>Wi-Fi o cable, banda, señal</td>
+<td>Sí</td>
+<td>No (se indica en el inventario)</td>
+</tr>
+<tr>
+<td>Tiempo conectado</td>
+<td>Tiempo real de asociación Wi-Fi, en muchos routers</td>
+<td>Desde que el agente lo ve sin interrupción, solo con el PC encendido</td>
+</tr>
+<tr>
+<td>Nombres</td>
+<td>Nombre DHCP de cada equipo</td>
+<td>mDNS, NetBIOS, SSDP o inventario</td>
+</tr>
+<tr>
+<td>Red de invitados y aislamiento de clientes</td>
+<td>Visible</td>
+<td>No visible</td>
+</tr>
+<tr>
+<td>Riesgo</td>
+<td>Hay que guardar la contraseña de administración del router, que da control total sobre la red; el acceso suele ser por HTTP sin cifrar, con una API distinta por modelo y firmware, y en muchos routers una sesión del agente cierra la del navegador</td>
+<td>Solo lectura, sin credenciales, sin abrir puertos ni cambiar nada en el router</td>
+</tr>
+</tbody></table>
+<p><strong>Ninguna de las dos garantiza el 100 %.</strong> El router es la fuente más completa porque es quien reparte las IP y
+asocia los equipos Wi-Fi, pero tampoco ve los equipos con IP fija en un switch que nunca han hablado con él, y
+su lista de concesiones incluye equipos que ya se fueron. El descubrimiento por la red ve todo lo que está
+encendido en la misma subred, porque responder a ARP es obligatorio para comunicarse, y falla con lo que está
+apagado, dormido con la Wi-Fi desactivada (lectores de tinta electrónica, algunos relojes), en la red de
+invitados o en otra subred.</p>
+<p>Por eso el proyecto combina <strong>descubrimiento por la red + inventario</strong>: es seguro (sin contraseñas), funciona
+con cualquier router y el inventario cubre lo que la red no puede saber. Para no olvidar ninguno, revisa de vez
+en cuando el grupo <em>Sin identificar</em> y añade cada MAC nueva al inventario: desde ese momento, el equipo aparece
+siempre, esté encendido o no.</p>
+<h2 id="límites">Límites</h2>
+<ul>
+<li>Solo se ve la subred del PC (si es mayor que /22, la /24 del PC). Una red de invitados u otra VLAN necesitan
+un agente dentro de ella.</li>
+<li>El tiempo conectado empieza de cero cuando el PC se enciende o cuando hay más de 15 minutos entre dos pasadas.
+Con el PC apagado, la pantalla muestra la última foto conocida y lo indica en la cabecera («PC apagado»).</li>
+<li>El propio PC aparece con su nombre de equipo y como en línea mientras el agente funciona.</li>
+<li>Caben unos 45 equipos en el diagrama y 28 en la lista; con más, la lista muestra cuántos quedan fuera.</li>
+</ul>
+
+  </article></main>
+</div>
+</body>
+</html>
